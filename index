@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora de Fricción Estática</title>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+    }
+    .caja {
+      background-color: #2c65c8;
+      color: white;
+      padding: 10px;
+      margin: 5px;
+      display: inline-block;
+      min-width: 150px;
+      text-align: center;
+      border-radius: 8px;
+    }
+    label, input {
+      display: block;
+      margin: 10px 0;
+    }
+    button {
+      padding: 10px 20px;
+      margin-bottom: 20px;
+    }
+    .formulas {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Calculadora de Fuerza de Fricción</h2>
+
+  <label>ϕₛ = θ (en grados):
+    <input type="number" id="angulo" value="56">
+  </label>
+
+  <label>m (kg):
+    <input type="number" id="masa" value="15">
+  </label>
+
+  <button onclick="calcular()">Calcular</button>
+
+  <div class="formulas">
+    <div class="caja" id="mu">μₛ</div>
+    <div class="caja" id="n">N</div><br>
+    <div class="caja" id="w">W</div>
+    <div class="caja" id="fm">Fₘ</div>
+  </div>
+
+  <script>
+    function calcular() {
+      const angulo = parseFloat(document.getElementById("angulo").value);
+      const masa = parseFloat(document.getElementById("masa").value);
+      const g = 9.81;
+
+      const mu = Math.tan(angulo * Math.PI / 180);
+      const W = masa * g;
+      const N = W * Math.cos(angulo * Math.PI / 180);
+      const Fm = mu * N;
+
+      document.getElementById("mu").textContent = mu.toFixed(6);
+      document.getElementById("w").textContent = W.toFixed(2);
+      document.getElementById("n").textContent = N.toFixed(6);
+      document.getElementById("fm").textContent = Fm.toFixed(6);
+    }
+  </script>
+
+</body>
+</html>
