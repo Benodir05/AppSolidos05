@@ -29,6 +29,12 @@
     .formulas {
       margin-top: 20px;
     }
+    em {
+      display: block;
+      margin-top: 5px;
+      font-size: 0.9em;
+      color: #d0d0d0;
+    }
   </style>
 </head>
 <body>
@@ -46,10 +52,23 @@
   <button onclick="calcular()">Calcular</button>
 
   <div class="formulas">
-    <div class="caja" id="mu">μₛ</div>
-    <div class="caja" id="n">N</div><br>
-    <div class="caja" id="w">W</div>
-    <div class="caja" id="fm">Fₘ</div>
+    <div class="caja">
+      <div id="mu">μₛ</div>
+      <em>μₛ = tan(ϕₛ)</em>
+    </div>
+    <div class="caja">
+      <div id="n">N</div>
+      <em>N = W·cos(θ)</em>
+    </div>
+    <br>
+    <div class="caja">
+      <div id="w">W</div>
+      <em>W = m·g</em>
+    </div>
+    <div class="caja">
+      <div id="fm">Fₘ</div>
+      <em>Fₘ = μₛ·N</em>
+    </div>
   </div>
 
   <script>
