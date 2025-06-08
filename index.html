@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Calculadora de Fricción Estática</title>
+  <title>Calculadora de Fricción</title>
   <style>
     body {
       font-family: Arial;
@@ -35,11 +35,15 @@
       font-size: 0.9em;
       color: #d0d0d0;
     }
+    hr {
+      margin: 40px 0;
+    }
   </style>
 </head>
 <body>
 
-  <h2>Calculadora de Fuerza de Fricción</h2>
+  <!-- SECCIÓN 1: FRICCIÓN ESTÁTICA -->
+  <h2>Calculadora de Fuerza de Fricción Estática</h2>
 
   <label>ϕₛ = θ (en grados):
     <input type="number" id="angulo" value="56">
@@ -49,7 +53,7 @@
     <input type="number" id="masa" value="15">
   </label>
 
-  <button onclick="calcular()">Calcular</button>
+  <button onclick="calcularEstatica()">Calcular</button>
 
   <div class="formulas">
     <div class="caja">
@@ -71,8 +75,44 @@
     </div>
   </div>
 
+  <hr>
+
+  <!-- SECCIÓN 2: FRICCIÓN CINEMÁTICA -->
+  <h2>Experimento con Fricción Cinemática</h2>
+
+  <label>Alto (a) en cm:
+    <input type="number" id="alto" value="200">
+  </label>
+
+  <label>Largo (b) en cm:
+    <input type="number" id="largo" value="50">
+  </label>
+
+  <label>Tiempo (s):
+    <input type="number" id="tiempo" value="4">
+  </label>
+
+  <label>Masa (kg):
+    <input type="number" id="masa2" value="2">
+  </label>
+
+  <button onclick="calcularCinematica()">Calcular</button>
+
+  <div class="formulas">
+    <div class="caja"><div id="theta">θ</div><em>θ = tan⁻¹(a / b)</em></div>
+    <div class="caja"><div id="W2">W</div><em>W = m · g</em></div>
+    <div class="caja"><div id="P">P</div><em>P = W · sen(θ)</em></div>
+    <div class="caja"><div id="N2">N</div><em>N = W · cos(θ)</em></div>
+    <div class="caja"><div id="x">x</div><em>x = √(a² + b²)</em></div>
+    <div class="caja"><div id="a">a</div><em>a = 2x / t²</em></div>
+    <div class="caja"><div id="Fk">Fk</div><em>Fk = P - m · a</em></div>
+    <div class="caja"><div id="mu_k">μₖ</div><em>μₖ = Fk / N</em></div>
+    <div class="caja"><div id="phi_k">φₖ</div><em>φₖ = tan⁻¹(μₖ)</em></div>
+  </div>
+
   <script>
-    function calcular() {
+    // Cálculo de fricción estática
+    function calcularEstatica() {
       const angulo = parseFloat(document.getElementById("angulo").value);
       const masa = parseFloat(document.getElementById("masa").value);
       const g = 9.81;
@@ -86,6 +126,36 @@
       document.getElementById("w").textContent = W.toFixed(2);
       document.getElementById("n").textContent = N.toFixed(6);
       document.getElementById("fm").textContent = Fm.toFixed(6);
+    }
+
+    // Cálculo de fricción cinemática
+    function calcularCinematica() {
+      const a = parseFloat(document.getElementById("alto").value);
+      const b = parseFloat(document.getElementById("largo").value);
+      const t = parseFloat(document.getElementById("tiempo").value);
+      const m = parseFloat(document.getElementById("masa2").value);
+      const g = 9.81;
+
+      const thetaRad = Math.atan(a / b);
+      const thetaDeg = thetaRad * (180 / Math.PI);
+      const W = m * g;
+      const P = W * Math.sin(thetaRad);
+      const N = W * Math.cos(thetaRad);
+      const x = Math.sqrt(a**2 + b**2) / 100; // en metros
+      const acel = (2 * x) / (t**2);
+      const Fk = P - m * acel;
+      const mu_k = Fk / N;
+      const phi_k = Math.atan(mu_k) * (180 / Math.PI);
+
+      document.getElementById("theta").textContent = thetaDeg.toFixed(6);
+      document.getElementById("W2").textContent = W.toFixed(2);
+      document.getElementById("P").textContent = P.toFixed(6);
+      document.getElementById("N2").textContent = N.toFixed(6);
+      document.getElementById("x").textContent = x.toFixed(6);
+      document.getElementById("a").textContent = acel.toFixed(6);
+      document.getElementById("Fk").textContent = Fk.toFixed(6);
+      document.getElementById("mu_k").textContent = mu_k.toFixed(6);
+      document.getElementById("phi_k").textContent = phi_k.toFixed(6);
     }
   </script>
 
