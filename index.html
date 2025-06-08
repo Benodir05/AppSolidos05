@@ -3,10 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <title>Calculadora de Fricción</title>
+  <!-- Fuente bonita -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Iconos Font Awesome -->
+  <script src="https://kit.fontawesome.com/2e0c0b5c35.js" crossorigin="anonymous"></script>
   <style>
     body {
-      font-family: Arial;
+      font-family: 'Poppins', sans-serif;
       padding: 20px;
+      background: #f3f7fa;
+      color: #333;
     }
     .caja {
       background-color: #2c65c8;
@@ -17,14 +23,34 @@
       min-width: 150px;
       text-align: center;
       border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s;
+    }
+    .caja:hover {
+      transform: scale(1.05);
     }
     label, input {
       display: block;
       margin: 10px 0;
     }
+    input {
+      padding: 6px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      width: 100%;
+    }
     button {
       padding: 10px 20px;
       margin-bottom: 20px;
+      background-color: #2c65c8;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #1e47a1;
     }
     .formulas {
       margin-top: 20px;
@@ -32,11 +58,13 @@
     em {
       display: block;
       margin-top: 5px;
-      font-size: 0.9em;
+      font-size: 0.85em;
       color: #d0d0d0;
     }
     hr {
       margin: 40px 0;
+      border: none;
+      border-top: 2px solid #ccc;
     }
   </style>
 </head>
@@ -61,7 +89,6 @@
 
   <img src="friccion_estatica.png" width="300" alt="Fricción estática">
 </div>
-
 
   <div class="formulas">
     <div class="caja">
@@ -124,7 +151,6 @@
   </div>
 
   <script>
-    // Cálculo de fricción estática
     function calcularEstatica() {
       const angulo = parseFloat(document.getElementById("angulo").value);
       const masa = parseFloat(document.getElementById("masa").value);
@@ -141,7 +167,6 @@
       document.getElementById("fm").textContent = Fm.toFixed(6);
     }
 
-    // Cálculo de fricción cinemática
     function calcularCinematica() {
       const h = parseFloat(document.getElementById("h").value);
       const b = parseFloat(document.getElementById("largo").value);
@@ -154,7 +179,7 @@
       const W = m * g;
       const P = W * Math.sin(thetaRad);
       const N = W * Math.cos(thetaRad);
-      const x = Math.sqrt(h**2 + b**2) / 100; // metros
+      const x = Math.sqrt(h**2 + b**2) / 100;
       const acel = (2 * x) / (t**2);
       const Fk = P - m * acel;
       const mu_k = Fk / N;
