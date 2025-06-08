@@ -46,9 +46,20 @@
   <img src="friccion2" alt="friccion2" width="300">
   <img src="Captura de pantalla 2025-06-07 201622.png" alt="grafica de fricciones" width="100">
   <h2>Calculadora de Fuerza de Fricción Estática</h2>
-<div style="display: flex; align-items: center;">
-  <img src="friccion_estatica.png" width="150">
-  <h2 style="margin-left: 20px;">Fricción estática</h2>
+<div style="display: flex; align-items: flex-start; gap: 40px;">
+  <div>
+    <label>ϕₛ = θ (en grados):
+      <input type="number" id="angulo" value="56">
+    </label>
+
+    <label>m (kg):
+      <input type="number" id="masa" value="15">
+    </label>
+
+    <button onclick="calcularEstatica()">Calcular</button>
+  </div>
+
+  <img src="friccion_estatica.png" width="150" alt="Fricción estática">
 </div>
 
   <label>ϕₛ = θ (en grados):
@@ -85,9 +96,28 @@
 
   <!-- SECCIÓN 2: FRICCIÓN CINEMÁTICA -->
   <h2>Calculadora de Fricción Cinemática</h2>
-<div style="display: flex; align-items: center;">
-  <img src="friccion_dinamica.png" width="150">
-  <h2 style="margin-left: 20px;">Fricción cinética</h2>
+<div style="display: flex; align-items: flex-start; gap: 40px;">
+  <div>
+    <label>Altura (h) en cm:
+      <input type="number" id="h" value="200">
+    </label>
+
+    <label>Largo (b) en cm:
+      <input type="number" id="largo" value="50">
+    </label>
+
+    <label>Tiempo (s):
+      <input type="number" id="tiempo" value="4">
+    </label>
+
+    <label>Masa (kg):
+      <input type="number" id="masa2" value="2">
+    </label>
+
+    <button onclick="calcularCinematica()">Calcular</button>
+  </div>
+
+  <img src="friccion_dinamica.png" width="200" alt="Fricción dinámica">
 </div>
 
   <label>Altura (h) en cm:
